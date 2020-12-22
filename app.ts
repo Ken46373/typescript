@@ -6,4 +6,9 @@ function printResult(num: number): void {
     console.log('Result: ' + num);
 }
 
+let combineValues: (a: number, b: number) => number;
+
+combineValues = add;
+
+console.log(combineValues(8, 8));
 printResult(add(5, 12));
