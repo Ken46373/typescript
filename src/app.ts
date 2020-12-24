@@ -1,15 +1,9 @@
-let userInput: unknown;
-let userName: string;
+class Department {
+    name: string;
 
-userInput = 5;
-userInput = 'Max';
-
-if (typeof userInput === 'string') {
-    userName = userInput;
+    constructor(n: string) {
+        this.name  = n;
+    }
 }
 
-function generateError(message: string, code: number): never {
-    throw { message: message, errorCode: code };
-}
-
-generateError('Error: ', 500);
+const accounting = new Department('Accounting');
