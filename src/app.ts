@@ -1,17 +1,6 @@
-type Admin = {
-    name: string;
-    privileges: string[];
+
+function merge<T extends object, U extends object>(obj1: T, obj2: U) {
+    return Object.assign(obj1, obj2);
 }
 
-type Employee = {
-    name: string;
-    startDate: Date;
-}
-
-type ElevatedEmployee = Admin & Employee;
-
-const e1: ElevatedEmployee = {
-    name: 'Max',
-    privileges: ['create-server'],
-    startDate: new Date(),
-}
+const mergedObj = merge({name: 'Max'}, {age: 30});
