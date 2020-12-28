@@ -1,26 +1,23 @@
 "use strict";
-let add;
-add = (n1, n2) => {
-    return n1 + n2;
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-class Person {
-    constructor(n) {
-        this.age = 30;
-        if (n) {
-            this.name = n;
-        }
-    }
-    greet(phrase) {
-        if (this.name) {
-            console.log(phrase + ' ' + this.name);
-        }
-        else {
-            console.log('Hi!!');
-        }
-    }
+function Logger(logString) {
+    return function (constructor) {
+        console.log(logString);
+        console.log(constructor);
+    };
 }
-let user1;
-user1 = new Person();
-user1.greet('Hello I am');
-console.log(user1);
+let Person = class Person {
+    constructor() {
+        this.name = 'Max';
+        console.log('Personオブジェクト作成中...');
+    }
+};
+Person = __decorate([
+    Logger('ログ出力 - Person')
+], Person);
 //# sourceMappingURL=app.js.map
