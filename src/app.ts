@@ -159,6 +159,15 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement> {
 class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> {
   private project: Project;
 
+  get manday() {
+    if (this.project.manday < 20) {
+      return this.project.manday.toString() + "人日";
+    }
+    else {
+      return (this.project.manday / 20).toString() + "人月";
+    }
+  }
+
   constructor(hostId: string, project: Project) {
     super("single-project", hostId, false, project.id);
     this.project = project;
@@ -173,7 +182,7 @@ class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> {
     this.element.querySelector("h2")!.textContent = this.project.title;
     this.element.querySelector(
       "h3"
-    )!.textContent = this.project.manday.toString();
+    )!.textContent = this.manday;
     this.element.querySelector("p")!.textContent = this.project.description;
   }
 }
