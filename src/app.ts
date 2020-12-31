@@ -10,7 +10,7 @@ class Project {
     public title: string,
     public description: string,
     public manday: number,
-    public status: ProjectStatus,
+    public status: ProjectStatus
   ) {}
 }
 
@@ -38,11 +38,11 @@ class ProjectState {
 
   addProject(title: string, description: string, manday: number) {
     const newProject = new Project(
-        Math.random().toString(),
-        title,
-        description,
-        manday,
-        ProjectStatus.Active,
+      Math.random().toString(),
+      title,
+      description,
+      manday,
+      ProjectStatus.Active
     );
     this.projects.push(newProject);
     for (const listenerFn of this.listeners) {
@@ -132,7 +132,13 @@ class ProjectList {
     this.element.id = `${this.type}-projects`;
 
     projectState.addListener((projects: Project[]) => {
-      this.assignedProjects = projects;
+      const relevantProjects = projects.filter((prj) => {
+        if (this.type === "active") {
+          return prj.status === ProjectStatus.Active;
+        }
+        return prj.status === ProjectStatus.Finished;
+      });
+      this.assignedProjects = relevantProjects;
       this.renderProjects();
     });
 
@@ -144,6 +150,7 @@ class ProjectList {
     const listEl = document.getElementById(
       `${this.type}-projects-list`
     )! as HTMLUListElement;
+    listEl.innerHTML = '';
     for (const prjItem of this.assignedProjects) {
       const listItem = document.createElement("li");
       listItem.textContent = prjItem.title;
