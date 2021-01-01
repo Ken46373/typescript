@@ -110,13 +110,33 @@ class ProjectItem extends Component {
         this.configure();
         this.renderContent();
     }
-    configure() { }
+    get manday() {
+        if (this.project.manday < 20) {
+            return this.project.manday.toString() + "人日";
+        }
+        else {
+            return (this.project.manday / 20).toString() + "人月";
+        }
+    }
+    dragStartHandler(event) {
+        console.log(event);
+    }
+    dragEndHandler(_) {
+        console.log('Drag終了');
+    }
+    configure() {
+        this.element.addEventListener('dragstart', this.dragStartHandler);
+        this.element.addEventListener('dragend', this.dragEndHandler);
+    }
     renderContent() {
         this.element.querySelector("h2").textContent = this.project.title;
-        this.element.querySelector("h3").textContent = this.project.manday.toString();
+        this.element.querySelector("h3").textContent = this.manday;
         this.element.querySelector("p").textContent = this.project.description;
     }
 }
+__decorate([
+    autobind
+], ProjectItem.prototype, "dragStartHandler", null);
 // ProjectList Class
 class ProjectList extends Component {
     constructor(type) {
